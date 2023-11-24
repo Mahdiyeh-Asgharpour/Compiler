@@ -20,7 +20,17 @@ tokens = (
        'BRR',
        'HASHTAG',
        'DOUBLEQ',
-       #Words
+       'QUESTION',
+       'PERCENT',
+       'IFEQUAL',
+       'BEQUAL',
+       'SEQUAL',
+       'NEQUAL',
+       'OR',
+       'AND',
+       'EXCLAMATION',
+       'DOUBLED',
+       #Words=Idens
        'WORD',
        'DEFWORD',
        'INTWORD',
@@ -75,6 +85,16 @@ t_BRL=r'\['
 t_BRR=r'\]'
 t_HASHTAG=r'\#'
 t_DOUBLEQ=r'\"'
+t_QUESTION=r'\?'
+t_PERCENT=r'%'
+t_IFEQUAL=r'=='
+t_BEQUAL=r'>='
+t_SEQUAL=r'<='
+t_NEQUAL=r'!='
+t_OR=r'\|\|'
+t_AND=r'&&'
+t_EXCLAMATION=r'!'
+t_DOUBLED=r':'
 #For words
 def t_WORD(t):
     r'[A-Za-z]([a-z]|[A-Z]|[0-9]|\_)*'
@@ -93,7 +113,10 @@ def t_newline(t):
 
 # A string containing ignored characters (spaces and tabs)
 t_ignore  = ' \t'
-
+#Comment
+def t_comment(t):
+    r'\#.*'
+    pass
 # Error handling rule
 def t_error(t):
     y=t.value[0]

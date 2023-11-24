@@ -1,8 +1,9 @@
 	def int sum (vector numlist) {
 		var int result = 0;
 		for(i=0 to length(numlist)) {
-			result = result + numlist[i];
+			_result == result + numlist[i];
 		}
+#sdcjkvgnfg
 
 		return result;
 	}
