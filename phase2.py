@@ -54,7 +54,7 @@ def p_expr(p):
     | builtin_methods"""
 def p_empty(p):
     "empty : "
-def builtin_methods(p):
+def p_builtin_methods(p):
     """builtin_methods : LENGTHWORD LPAREN expr RPAREN
     | SCANWORD LPAREN RPAREN 
     | PRINTWORD LPAREN expr RPAREN
