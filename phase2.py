@@ -5,7 +5,7 @@ from calclex import tokens
 
 def p_prog(p):
     "prog :empty | func prog"
-def f_func(p):
+def p_func(p):
     "func : DEFWORD type WORD LPAREN flist RPAREN CROR body CROL | DEFWORD  type WORD LPAREN flist RPAREN RETURNWORD expr SEMICOULOMN"
 def p_body(p):
     "body : empty | stmt body"
@@ -63,6 +63,49 @@ def p_builtin_methods(p):
 # Error rule for syntax errors
 def p_error(p):
     print("Syntax error in input!")
+def p_func1_error(p):
+    "func : DEFWORD type WORD LPAREN error RPAREN CROR body CROL "
+    print("error :" + p[5]+ "in"+p.lineno(5))
+def p_func2_error(p):
+    "func : DEFWORD  type WORD LPAREN error RPAREN RETURNWORD expr SEMICOULOMN"
+    print("error :"+ p[5]+ "in"+p.lineno(5))
+def p_stmt1_error(p):
+    "stmt : error SEMICOULOMN"
+    print ("error :"+p[0]+ "in"+p.lineno(0))
+def p_stmt2_error(p):
+    "stmt : FORWORD LPAREN WORD  EQUAL error TOWORD expr RPAREN stmt"
+    print("error :"+ p[4]+ "in"+p.lineno(4))
+def p_defvar1_error(p):
+    "defvar : VARWORD error WORD"
+    print("error :"+p[1]+ "in"+p.lineno(1))
+def p_defvar2_error(p):
+    "defvar : VARWORD error WORD EQUAL expr"
+    print("error :"+p[1]+ "in"+p.lineno(1))
+def p_flist1_error(p):
+    "flist :error WORD"
+    print("error :"+p[0]+ "in"+p.lineno(0))
+def p_flist2_error(p):
+    "flist : type error COMMA flist"
+    print("error :"+p[1]+ "in"+p.lineno(1))
+def p_flist3_error(p):
+    "flist : error WORD COMMA flist"
+    print("error :"+p[0]+ "in"+p.lineno(0))
+def p_flist4_error(p):
+    "flist : type WORD COMMA error"
+    print("error :"+p[3]+ "in"+p.lineno(3))
+def p_expr1_error(p):
+    "expr : error LPAREN clist RPAREN"
+    print("error :"+p[0]+ "in"+p.lineno(0))
+def p_expr2_error(p):
+    "expr : WORD LPAREN error RPAREN"
+    print("error :"+p[2]+ "in"+p.lineno(2))
+def p_builtin_methods1_error(p):
+    """builtin_methods : error LPAREN expr RPAREN"""
+    print("error :"+p[0]+ "in"+p.lineno(0))
+def p_builtin_methods2_error(p):
+    """builtin_methods : error LPAREN RPAREN"""
+    print("error :"+p[0]+ "in"+p.lineno(0))
+
 
 # Build the parser
 parser = yacc.yacc()
